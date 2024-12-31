@@ -5,6 +5,8 @@ import './App.css'
 import SearchForm from './Components/SearchForm'
 import GifList from './Components/GifList'
 
+const { REACT_APP_API_KEY_GIPHY } = process.env;
+
 export default class App extends Component {
   
   state = { gifs: [], loading: true }
@@ -14,7 +16,7 @@ export default class App extends Component {
 // ComponentDidMount is called immediately 
 // after a component is added to the DOM.
   // componentDidMount() {
-  //   axios.get('http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC')
+  //   axios.get('https://api.giphy.com/v1/gifs/trending?api_key=${REACT_APP_API_KEY_GIPHY}')
   //     .then(res => this.setState({ gifs: res.data.data })) // axios respond directly with json()
   //     .catch( err => console.log('Error fetching gifs', err) )
   // }
@@ -22,7 +24,7 @@ export default class App extends Component {
   // ** With fetch  **
 
   // componentDidMount() {
-  //   fetch('http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC')
+  //   fetch('https://api.giphy.com/v1/gifs/trending?api_key=${REACT_APP_API_KEY_GIPHY}')
   //     .then(res => res.json())
   //     .then(resData => {
   //       this.setState({ gifs: resData.data })
@@ -37,7 +39,7 @@ export default class App extends Component {
   }
 
   performSearch = (query = 'cats') => {
-    axios.get(`http://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=dc6zaTOxFJmzC`)
+    axios.get(`https://api.giphy.com/v1/gifs/search?q=${query}&limit=10&api_key=${REACT_APP_API_KEY_GIPHY}`)
       .then(res => this.setState({ gifs: res.data.data, loading: false}))
       .catch( err => console.log('Error fetching gifs', err) )
   } 
